@@ -3,8 +3,17 @@ const puppeteer = require('puppeteer')
 
 export default async (req, res) => {
   const date = new Date()
-  const browser = await puppeteer.launch()
+
+  const browser = await puppeteer.launch(
+    {
+      args: chrome.args,
+      executablePath: await chrome.executablePath,
+      headless: chrome.headless,
+    }
+  )
+
   const page = await browser.newPage()
+  page.setUserAgent('Opera/9.80 (J2ME/MIDP; Opera Mini/5.1.21214/28.2725; U; ru) Presto/2.8.119 Version/11.10')
   await page.goto('https://www.reclameaqui.com.br/empresa/lottocap/')
 
   const avg = await page.evaluate(() => {
