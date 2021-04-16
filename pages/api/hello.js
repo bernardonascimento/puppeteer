@@ -24,7 +24,7 @@ export default async (req, res) => {
 
   await browser.close()
 
-  res.setHeader('Cache-control', 's-max-age=60, stable-while-revalidate')
+  res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate')
   res.status(200).json({ 
     date: date.toUTCString(),
     avg
